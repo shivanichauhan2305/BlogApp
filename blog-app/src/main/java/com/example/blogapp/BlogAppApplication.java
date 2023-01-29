@@ -8,9 +8,13 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
-public class BlogAppApplication{
+public class BlogAppApplication implements CommandLineRunner{
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BlogAppApplication.class, args);
@@ -20,6 +24,12 @@ public class BlogAppApplication{
     public ModelMapper modelMapper() {
         return new ModelMapper();
     }
+
+	@Override
+	public void run(String... args) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println(this.passwordEncoder.encode("xyz"));
+	}
     
 
 }
